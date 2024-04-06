@@ -23,9 +23,9 @@ router.post('/', async (req, res) => {
 
 router.get('/profile', async (req, res) => {
     try {
-        const [PaymentMethodChangeEvent, token] = req.headers.authorization.split(' ')
+        const [method, token] = req.headers.authorization.split(' ')
 
-        if (PaymentMethodChangeEvent == 'Bearer') {
+        if (method == 'Bearer') {
             const result = await jwt.decode(process.env.JWT_SECRET, token)
             const { id } = result.value
         }
