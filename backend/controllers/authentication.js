@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         })
     } else {
         const result = await jwt.encode(process.env.JWT_SECRET, { id: user.userId })
-        res.json({ user })
+        res.json({ user, token: result.value })
     }
 })
 
