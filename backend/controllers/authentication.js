@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         })
     } else {
         const result = await jwt.encode(process.env.JWT_SECRET, { id: user.userId })
-        res.json({ user, token: result.value })
+        res.json({ user: user, token: result.value })
     }
 })
 
@@ -33,15 +33,15 @@ router.get('/profile', async (req, res) => {
 
             // Get the logged in user's id from the payload
             const { id } = result.value
-        }
 
-        // Find the user object using their id:
-        let user = await User.findOne({
-            where: {
-                userId: id
-            }
-        })
-        res.json(user)
+            // Find the user object using their id:
+            let user = await User.findOne({
+                where: {
+                    userId: id
+                }
+            })
+            res.json(user)
+        }
     } catch {
         res.json(null)
     }
